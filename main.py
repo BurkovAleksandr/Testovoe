@@ -78,7 +78,7 @@ async def download_report(item_id: int, db: Session = Depends(get_db)):
     entry = db.query(SuipMetadata).filter(SuipMetadata.id == item_id).first()
     if not entry:
         raise HTTPException(status_code=404, detail="Report not found")
-
+    
     # Создаём временный файл
     with tempfile.NamedTemporaryFile(
         delete=False, suffix=".json", mode="w", encoding="utf-8"

@@ -56,8 +56,10 @@ def upload_and_parse_file(file: UploadFile, url: str) -> Dict[str, str]:
         raise HTTPException(
             status_code=502, detail=f"Failed to fetch from suip.biz: {str(e)}"
         )
-
-    result = parse_suip_response(response.text)
+    try:
+        result = parse_suip_response(response.text)
+    except:
+        result = None
     if not result:
         raise HTTPException(status_code=500, detail="Could not parse response")
     return result
