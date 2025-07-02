@@ -80,6 +80,7 @@ dbname: suip
 
 ```
 ├── main.py               # API логика
+├── parser.py             # Логика парсера
 ├── Dockerfile            # Docker образ FastAPI
 ├── docker-compose.yml    # Сборка backend + PostgreSQL
 ├── README.md             # Инструкция
