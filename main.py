@@ -66,7 +66,7 @@ async def get_suip_data(
                 "filename": item.filename,
                 "metadata": item.file_metadata,
                 "created_at": item.created_at.isoformat(),
-                "save_report": f'<a href="/suip-data/{item.id}/report">Скачать отчёт</a>',
+                "save_report": f"/suip-data/{item.id}/report",
             }
             for item in items
         ],
@@ -78,7 +78,7 @@ async def download_report(item_id: int, db: Session = Depends(get_db)):
     entry = db.query(SuipMetadata).filter(SuipMetadata.id == item_id).first()
     if not entry:
         raise HTTPException(status_code=404, detail="Report not found")
-    
+
     # Создаём временный файл
     with tempfile.NamedTemporaryFile(
         delete=False, suffix=".json", mode="w", encoding="utf-8"
